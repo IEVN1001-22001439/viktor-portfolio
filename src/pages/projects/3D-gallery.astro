@@ -1,0 +1,354 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { translations } from "../../i18n/translations";
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get("lang");
+const lang = (langParam as keyof typeof translations) || "es";
+const t = translations[lang];
+
+const models = [
+  {
+    id: 1,
+    src: "/models/kewpie.glb",
+    poster: "/posters/3d/kewpie.webp",
+    title: t.gallery.models.kewpie.title,
+    description: "Modelo 3D interactivo",
+    details: t.gallery.models.kewpie.details,
+    tags: [
+      t.gallery.tags.sculpture,
+      t.gallery.tags.character,
+      t.gallery.tags.lowPoly,
+    ],
+    orbit: "-536.5deg 84.11deg 10.62m",
+    fov: "30deg",
+  },
+  {
+    id: 2,
+    src: "/models/lowpolySailorMoon.glb",
+    poster: "/posters/3d/lowpolySailorMoon.webp",
+    title: t.gallery.models.sailorMoon.title,
+    description: "Configurador 3D interactivo",
+    details: t.gallery.models.sailorMoon.details,
+    tags: [
+      t.gallery.tags.ecommerce,
+      t.gallery.tags.personalization,
+      t.gallery.tags.uiux,
+    ],
+    orbit: "0deg 75deg 1.5m",
+    fov: "45deg",
+  },
+];
+---
+
+<Layout title={`${t.gallery.title} | Viktor`}>
+  <div
+    class="mx-auto max-w-7xl p-4 sm:p-6 md:p-8 rounded-3xl my-4 sm:my-8 w-full h-fit
+        bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-lg border border-white/90
+        shadow-lg hover:shadow-xl transition-all duration-500"
+  >
+    <header class="mb-8 md:mb-10 text-center">
+      <h1
+        class="text-3xl sm:text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-900 to-blue-400 mb-4"
+      >
+        {t.gallery.title}
+      </h1>
+      <p class="text-blue-900/70 max-w-2xl mx-auto text-sm sm:text-base">
+        {t.gallery.subtitle}
+      </p>
+    </header>
+
+    <div class="flex flex-col lg:flex-row gap-4 md:gap-6">
+      <div
+        class="lg:w-1/5 flex lg:flex-col gap-3 p-2 overflow-x-auto lg:overflow-visible scrollbar-hide"
+      >
+        {
+          models.map((model, index: number) => (
+            <button
+              type="button"
+              class="thumbnail group relative flex-shrink-0"
+              data-index={index}
+            >
+              <img
+                src={model.poster}
+                alt={model.title}
+                class="w-20 h-20 lg:w-full lg:h-24 object-contain rounded-xl transition-all duration-300 group-hover:opacity-100 group-[.active]:opacity-100 opacity-70 group-hover:scale-105 border-2 border-transparent group-[.active]:border-emerald-400 bg-white/5 p-1"
+              />
+              <span class="thumbnail-title">{model.title}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      <div
+        class="flex-1 relative h-[50vh] sm:h-[60vh] min-h-[400px] sm:min-h-[500px] rounded-xl overflow-hidden bg-transparent"
+      >
+        {
+          models.map((model, index: number) => (
+            <div
+              class={`absolute inset-0 transition-opacity duration-500 ${index === 0 ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+              data-model
+              data-index={index}
+            >
+              <model-viewer
+                src={model.src}
+                poster={model.poster}
+                alt={model.title}
+                camera-controls
+                camera-orbit={model.orbit}
+                field-of-view={model.fov}
+                shadow-intensity="1"
+                exposure="0.8"
+                environment-image="neutral"
+                interaction-prompt="none"
+                class="w-full h-full bg-transparent"
+                style="background-color: transparent;"
+              ></model-viewer>
+            </div>
+          ))
+        }
+
+        <button class="carousel-nav prev" type="button" id="prev-btn">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path d="M15 18l-6-6 6-6"></path>
+          </svg>
+        </button>
+
+        <button class="carousel-nav next" type="button" id="next-btn">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path d="M9 18l6-6-6-6"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div
+        class="lg:w-1/4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 h-fit"
+      >
+        <div id="model-info">
+          {
+            models.map((model, index: number) => (
+              <div
+                class={`transition-opacity duration-300 ${index === 0 ? "opacity-100" : "opacity-0 absolute"}`}
+                data-info
+                data-index={index}
+              >
+                <h3 class="text-blue-900/80 font-bold text-lg md:text-xl mb-2">
+                  {model.title}
+                </h3>
+                <p class="text-blue-900/60 text-sm leading-relaxed">
+                  {model.details}
+                </p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                  {model.tags.map((tag) => (
+                    <span class="bg-white/20 backdrop-blur-sm text-blue-900/70 border border-white/30 text-xs px-3 py-1 rounded-full font-medium">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style scoped>
+    .thumbnail {
+      position: relative;
+      transition: all 0.3s ease;
+      border: none;
+      background: none;
+      padding: 0;
+      width: 80px;
+      height: 80px;
+    }
+
+    @media (min-width: 1024px) {
+      .thumbnail {
+        width: 100%;
+        height: 96px;
+      }
+    }
+
+    .thumbnail.active img {
+      opacity: 1;
+    }
+
+    .thumbnail-title {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      color: #1e3a8a;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.7rem;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border-radius: 8px;
+      pointer-events: none;
+      white-space: nowrap;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-weight: 500;
+    }
+
+    .thumbnail:hover .thumbnail-title {
+      opacity: 1;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #1e3a8a;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 20;
+    }
+
+    .carousel-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-nav.prev {
+      left: 1rem;
+    }
+
+    .carousel-nav.next {
+      right: 1rem;
+    }
+
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+
+    model-viewer {
+      --poster-color: transparent;
+      --progress-bar-color: transparent;
+      background-color: transparent !important;
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      console.log("🚀 Galería 3D cargada");
+
+      let currentModelIndex = 0;
+      const models = document.querySelectorAll("[data-model]");
+      const infoPanels = document.querySelectorAll("[data-info]");
+      const thumbnails = document.querySelectorAll(".thumbnail");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+
+      console.log("🔍 Elementos encontrados:", {
+        models: models.length,
+        infoPanels: infoPanels.length,
+        thumbnails: thumbnails.length,
+        prevBtn: !!prevBtn,
+        nextBtn: !!nextBtn,
+      });
+
+      if (!prevBtn || !nextBtn || models.length === 0) {
+        console.error("❌ Elementos de la galería no encontrados");
+        return;
+      }
+
+      function showModel(index) {
+        console.log("🎯 Mostrando modelo:", index);
+
+        if (models[currentModelIndex]) {
+          models[currentModelIndex].classList.remove("opacity-100");
+          models[currentModelIndex].classList.add(
+            "opacity-0",
+            "pointer-events-none",
+          );
+        }
+        if (infoPanels[currentModelIndex]) {
+          infoPanels[currentModelIndex].classList.add("opacity-0", "absolute");
+          infoPanels[currentModelIndex].classList.remove("opacity-100");
+        }
+        if (thumbnails[currentModelIndex]) {
+          thumbnails[currentModelIndex].classList.remove("active");
+        }
+
+        currentModelIndex = index;
+        if (models[currentModelIndex]) {
+          models[currentModelIndex].classList.remove(
+            "opacity-0",
+            "pointer-events-none",
+          );
+          models[currentModelIndex].classList.add("opacity-100");
+        }
+        if (infoPanels[currentModelIndex]) {
+          infoPanels[currentModelIndex].classList.remove(
+            "opacity-0",
+            "absolute",
+          );
+          infoPanels[currentModelIndex].classList.add("opacity-100");
+        }
+        if (thumbnails[currentModelIndex]) {
+          thumbnails[currentModelIndex].classList.add("active");
+        }
+      }
+
+      thumbnails.forEach(function (thumb, index) {
+        thumb.addEventListener("click", function () {
+          console.log("🖱️ Click en miniatura:", index);
+          showModel(index);
+        });
+      });
+
+      prevBtn.addEventListener("click", function () {
+        console.log("⬅️ Botón anterior");
+        const newIndex =
+          (currentModelIndex - 1 + models.length) % models.length;
+        showModel(newIndex);
+      });
+
+      nextBtn.addEventListener("click", function () {
+        console.log("➡️ Botón siguiente");
+        const newIndex = (currentModelIndex + 1) % models.length;
+        showModel(newIndex);
+      });
+
+      console.log("✅ Inicializando galería");
+      showModel(0);
+    });
+  </script>
+
+  <script
+    type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"
+  ></script>
+</Layout>

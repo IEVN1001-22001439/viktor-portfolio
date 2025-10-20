@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+html {
+    scroll-behavior: smooth;
+}
+
+section,
+[id] {
+    scroll-margin-top: 100px;
+}
+
+#about,
+#skills,
+#projects {
+    scroll-margin-top: 100px;
+}
+
+.container mx-auto {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  main > section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

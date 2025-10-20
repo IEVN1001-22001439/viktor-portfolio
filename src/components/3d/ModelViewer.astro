@@ -1,0 +1,139 @@
+---
+interface Props {
+    src: string;
+    poster: string;
+    title: string;
+    description?: string;
+    tags?: string[];
+    scale?: string;
+    cameraOrbit?: string;
+}
+
+const {
+    src,
+    poster,
+    title,
+    description = "",
+    tags = [],
+    scale = "1 1 1",
+    cameraOrbit = "45deg 55deg 2.5m",
+} = Astro.props;
+---
+
+<div
+    class="group relative h-96 rounded-2xl overflow-hidden hover:shadow-[0_0_30px_-10px_rgba(110,231,183,0.3)] transition-all duration-300 transform hover:-translate-y-1"
+>
+    <model-viewer
+        src={src}
+        poster={poster}
+        class="w-full h-full bg-gray-900/10"
+        camera-controls
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        shadow-intensity="1"
+        exposure="0.8"
+        environment-image="neutral"
+        alt={title}
+        scale={scale}
+        camera-orbit={cameraOrbit}
+    >
+        <!-- Loading progress -->
+        <div slot="progress-bar" class="progress-bar">
+            <div class="progress-bar__fill"></div>
+        </div>
+
+        <!-- AR button -->
+        <button slot="ar-button" class="ar-button"> 👁️ Ver en AR </button>
+
+        <!-- Fullscreen button -->
+        <button slot="fullscreen-button" class="fullscreen-button">
+            ⛶ Pantalla completa
+        </button>
+
+        {description && <div slot="description">{description}</div>}
+    </model-viewer>
+
+    <!-- Info overlay -->
+    <div
+        class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none flex flex-col justify-end p-6 opacity-100 group-hover:opacity-100 transition-opacity duration-300"
+    >
+        <h3 class="text-2xl font-bold text-white mb-1">{title}</h3>
+        {description && <p class="text-gray-300 text-sm mb-2">{description}</p>}
+        <div class="flex flex-wrap gap-2">
+            {
+                tags.map((tag) => (
+                    <span class="inline-block bg-emerald-400/10 text-emerald-400 text-xs px-2 py-1 rounded-full backdrop-blur-sm">
+                        {tag}
+                    </span>
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<style is:global>
+    model-viewer {
+        --progress-bar-color: rgba(110, 231, 183, 0.75);
+        --progress-bar-height: 3px;
+    }
+
+    .progress-bar {
+        display: block;
+        width: 100%;
+        height: var(--progress-bar-height);
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    .progress-bar__fill {
+        height: 100%;
+        width: 100%;
+        background-color: var(--progress-bar-color);
+        transform-origin: left;
+        animation: loading 2.5s infinite;
+    }
+
+    @keyframes loading {
+        0% {
+            transform: scaleX(0);
+        }
+        50% {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        51% {
+            transform-origin: right;
+        }
+        100% {
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+    }
+
+    .ar-button,
+    .fullscreen-button {
+        background: rgba(30, 41, 59, 0.8);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 9999px;
+        color: white;
+        padding: 8px 12px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin: 4px;
+    }
+
+    .ar-button:hover,
+    .fullscreen-button:hover {
+        background: rgba(110, 231, 183, 0.2);
+        border-color: rgba(110, 231, 183, 0.5);
+    }
+</style>
+
+<script
+    is:inline
+    src="https://unpkg.com/@google/model-viewer@^2.1.1/dist/model-viewer.min.js"
+    type="module"></script>

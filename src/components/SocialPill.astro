@@ -1,0 +1,19 @@
+---
+import "../styles/global.css";
+---
+
+<a
+    class="
+    rounded-full
+    text-black/70
+    border border-white
+    bg-white/10 backdrop-blur-md flex justify-center items-center
+    gap-x-2 py-2 px-4
+    shadow-md inset-shadow-sm
+   transition-all duration-300 hover:scale-110 hover:shadow-sm hover:bg-white/20 hover:inset-shadow-md"
+    {...Astro.props}
+    target="_blank"
+    rel="noopener noreferer"
+>
+    <slot />
+</a>

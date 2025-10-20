@@ -1,0 +1,60 @@
+---
+import { translations } from "../i18n/translations";
+
+const currentUrl = new URL(Astro.request.url);
+const currentLang =
+    (currentUrl.searchParams.get("lang") as keyof typeof translations) || "es";
+const currentPath = currentUrl.pathname; // Obtener la ruta actual
+---
+
+<div class="language-selector">
+    <form method="GET" action={currentPath}>
+        <!-- Usar la ruta actual -->
+        <select
+            name="lang"
+            class="language-dropdown"
+            onchange="this.form.submit()"
+        >
+            <option value="es" selected={currentLang === "es"}>🇲🇽 ES</option>
+            <option value="en" selected={currentLang === "en"}>🇺🇸 EN</option>
+            <option value="fr" selected={currentLang === "fr"}>🇫🇷 FR</option>
+        </select>
+    </form>
+</div>
+
+<style>
+    .language-selector {
+        position: relative;
+    }
+
+    .language-dropdown {
+        padding: 0.3rem 0.6rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        color: #1e3a8a;
+        font-weight: 500;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.3s ease;
+        font-size: 0.75rem;
+        min-width: 60px;
+    }
+
+    @media (min-width: 640px) {
+        .language-dropdown {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            min-width: 70px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .language-dropdown {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            min-width: 80px;
+        }
+    }
+</style>

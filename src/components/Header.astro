@@ -1,0 +1,229 @@
+---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { translations } from "../i18n/translations";
+import { Image } from "astro:assets";
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get("lang");
+const lang = (langParam as keyof typeof translations) || "es";
+const t = translations[lang];
+---
+
+<header
+    class="sticky top-4 flex justify-between items-center mx-4 sm:mx-auto w-full sm:w-[95%] lg:w-[1120px] rounded-full px-4 sm:px-6 py-2 my-4 bg-white/10 backdrop-blur-md border-white border-1 inset-shadow-sm shadow-md z-50"
+>
+    <!-- Logo -->
+    <a href={`/?lang=${lang}`} class="flex-shrink-0">
+        <Image
+            src="/media/img/Viktor-logo-liquid-metal.png"
+            alt="Viktor liquid metal logo"
+            width={85}
+            height={85}
+            class="w-[50px] sm:w-[70px] lg:w-[85px] h-auto"
+            loading="eager"
+            fetchpriority="high"
+            decoding="sync"
+        >
+        
+            <!-- Navegación Desktop - Siempre lleva al index -->
+            <nav
+                class="hidden md:flex flex-row gap-x-6 lg:gap-x-8 justify-center opacity-70 text-base lg:text-md"
+            >
+                <a
+                    href={`/?lang=${lang}#about`}
+                    class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
+                >
+                    {t.nav.about}
+                </a>
+                <a
+                    href={`/?lang=${lang}#skills`}
+                    class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
+                >
+                    {t.nav.skills}
+                </a>
+                <a
+                    href={`/?lang=${lang}#projects`}
+                    class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
+                >
+                    {t.nav.projects}
+                </a>
+            </nav>
+
+            <!-- Controles derecho -->
+            <div class="flex items-center gap-x-3 sm:gap-x-4">
+                <div class="hidden sm:block">
+                    <LanguageSwitcher />
+                </div>
+
+                <!-- Menú Hamburguesa -->
+                <button
+                    class="md:hidden flex flex-col justify-center items-center w-8 h-8 relative group"
+                    id="menu-toggle"
+                    type="button"
+                    aria-label="Abrir menú"
+                >
+                    <span
+                        class="w-6 h-0.5 bg-blue-900/70 mb-1.5 transition-all duration-300 group-[.active]:rotate-45 group-[.active]:mb-0 group-[.active]:translate-y-1"
+                    ></span>
+                    <span
+                        class="w-6 h-0.5 bg-blue-900/70 mb-1.5 transition-all duration-300 group-[.active]:opacity-0"
+                    ></span>
+                    <span
+                        class="w-6 h-0.5 bg-blue-900/70 transition-all duration-300 group-[.active]:-rotate-45 group-[.active]:-translate-y-1"
+                    ></span>
+                </button>
+            </div>
+
+            <!-- Menú Móvil - Siempre lleva al index -->
+            <div
+                class="absolute top-full left-0 right-0 bg-white/70 backdrop-blur-xl border-white border-1 inset-shadow-sm shadow-md rounded-2xl mx-4 mt-2 p-4 opacity-0 invisible transition-all duration-300 translate-y-2 md:hidden"
+                id="mobile-menu"
+            >
+                <nav class="flex flex-col gap-2">
+                    <a
+                        href={`/?lang=${lang}#about`}
+                        class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
+                        data-menu-close
+                    >
+                        {t.nav.about}
+                    </a>
+                    <a
+                        href={`/?lang=${lang}#skills`}
+                        class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
+                        data-menu-close
+                    >
+                        {t.nav.skills}
+                    </a>
+                    <a
+                        href={`/?lang=${lang}#projects`}
+                        class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
+                        data-menu-close
+                    >
+                        {t.nav.projects}
+                    </a>
+                    <div class="bg-white/50 pt-3 border-t border-white/20 mt-2">
+                        <div class="flex justify-center">
+                            <LanguageSwitcher />
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </Image>
+
+        <script is:inline>
+            // Script con is:inline para evitar TypeScript
+            document.addEventListener("DOMContentLoaded", function () {
+                var menuToggle = document.getElementById("menu-toggle");
+                var mobileMenu = document.getElementById("mobile-menu");
+                var menuCloseItems =
+                    document.querySelectorAll("[data-menu-close]");
+                var navLinks = document.querySelectorAll(".nav-link");
+
+                // Verificar que los elementos existen
+                if (!menuToggle || !mobileMenu) return;
+
+                function toggleMenu() {
+                    menuToggle.classList.toggle("active");
+                    mobileMenu.classList.toggle("opacity-0");
+                    mobileMenu.classList.toggle("invisible");
+                    mobileMenu.classList.toggle("translate-y-2");
+                    mobileMenu.classList.toggle("opacity-100");
+                    mobileMenu.classList.toggle("visible");
+                    mobileMenu.classList.toggle("translate-y-0");
+                }
+
+                function closeMenu() {
+                    menuToggle.classList.remove("active");
+                    mobileMenu.classList.add(
+                        "opacity-0",
+                        "invisible",
+                        "translate-y-2",
+                    );
+                    mobileMenu.classList.remove(
+                        "opacity-100",
+                        "visible",
+                        "translate-y-0",
+                    );
+                }
+
+                // Scroll suave solo para enlaces que son anchors en la misma página
+                navLinks.forEach(function (link) {
+                    link.addEventListener("click", function (e) {
+                        var href = this.getAttribute("href");
+                        var currentPath = window.location.pathname;
+                        var targetPath =
+                            href
+                                .split("#")[0]
+                                .replace("/?lang=" + getCurrentLang(), "") ||
+                            "/";
+
+                        // Si estamos en la página principal y es un anchor link
+                        if (
+                            currentPath === "/" &&
+                            href.includes("#") &&
+                            href.startsWith("/?")
+                        ) {
+                            e.preventDefault();
+
+                            var targetId = href.split("#")[1];
+                            var targetElement =
+                                document.getElementById(targetId);
+
+                            if (targetElement) {
+                                // Cerrar menú móvil si está abierto
+                                closeMenu();
+
+                                // Scroll suave
+                                targetElement.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                });
+
+                                // Actualizar URL sin recargar
+                                window.history.pushState(null, "", href);
+                            }
+                        }
+                        // Si no estamos en la página principal, dejar que el enlace navegue normalmente
+                    });
+                });
+
+                function getCurrentLang() {
+                    var urlParams = new URLSearchParams(window.location.search);
+                    return urlParams.get("lang") || "es";
+                }
+
+                menuToggle.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    toggleMenu();
+                });
+
+                // Cerrar menú al hacer clic en un enlace
+                menuCloseItems.forEach(function (item) {
+                    item.addEventListener("click", closeMenu);
+                });
+
+                // Cerrar menú al hacer clic fuera
+                document.addEventListener("click", function (event) {
+                    if (!mobileMenu.classList.contains("opacity-100")) return;
+
+                    var clickInsideMenu = mobileMenu.contains(event.target);
+                    var clickOnToggle = menuToggle.contains(event.target);
+
+                    if (!clickInsideMenu && !clickOnToggle) {
+                        closeMenu();
+                    }
+                });
+
+                // Cerrar menú al presionar Escape
+                document.addEventListener("keydown", function (event) {
+                    if (
+                        event.key === "Escape" &&
+                        mobileMenu.classList.contains("opacity-100")
+                    ) {
+                        closeMenu();
+                    }
+                });
+            });
+        </script>
+    </a>
+</header>

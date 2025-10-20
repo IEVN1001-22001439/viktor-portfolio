@@ -1,0 +1,36 @@
+---
+import { translations } from "../i18n/translations";
+
+const url = new URL(Astro.request.url);
+const langParam = url.searchParams.get('lang');
+const lang = langParam as keyof typeof translations || 'es';
+const t = translations[lang];
+---
+
+<footer class="w-full py-8 mt-20 bg-transparent">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col items-center gap-4 text-center">
+            <!-- Línea decorativa -->
+            <div class="w-20 h-0.5 bg-blue-900/20 rounded-full"></div>
+            
+            <!-- Texto principal -->
+            <p class="text-blue-900/70 text-sm sm:text-base font-medium tracking-wide">
+                Víctor Hugo Amador | {t.hero.subtitle}
+            </p>
+            
+            <!-- Texto Astro con más estilo -->
+            <div class="flex items-center gap-3 text-blue-900/60 text-xs sm:text-sm font-light">
+                <span class="text-lg animate-pulse">✨</span>
+                <span class="bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full border border-white/20">
+                    {lang === 'es' ? 'Creado con' : lang === 'en' ? 'Built with' : 'Construit avec'} <span class="font-semibold text-blue-600">Astro</span>
+                </span>
+                <span class="text-lg animate-pulse">✨</span>
+            </div>
+            
+            <!-- Año actual -->
+            <p class="text-blue-900/40 text-xs mt-2">
+                © {new Date().getFullYear()}
+            </p>
+        </div>
+    </div>
+</footer>
