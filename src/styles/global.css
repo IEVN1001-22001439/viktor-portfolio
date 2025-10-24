@@ -50,84 +50,105 @@ div {
 
 /* FIX PARA MENÚ HAMBURGUESA - permite que el dropdown se muestre */
 header {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 
 #mobile-menu {
-    overflow: visible !important;
-    z-index: 10000 !important; /* Asegurar que esté por encima de todo */
+  overflow: visible !important;
+  z-index: 10000 !important;
+  /* Asegurar que esté por encima de todo */
 }
 
 .language-selector {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 
 .language-options {
-    overflow: visible !important;
-    z-index: 10000 !important;
+  overflow: visible !important;
+  z-index: 10000 !important;
 }
 
 /* Asegurar que los dropdowns no se corten */
 .language-dropdown-container,
 #menu-toggle,
 .thumbnail {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 
 /* FIX PARA DOBLE SCROLL */
-html, body {
-    height: 100%;
-    overflow-x: hidden;
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    position: relative;
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
 /* Asegurar que las secciones no creen scroll interno */
-section, .section-container, main {
-    overflow: visible !important;
-    max-height: none !important;
+section,
+.section-container,
+main {
+  overflow: visible !important;
+  max-height: none !important;
 }
 
 /* Fix específico para secciones con altura */
-#about, #skills, #projects {
-    min-height: auto;
-    height: auto;
+#about,
+#skills,
+#projects {
+  min-height: auto;
+  height: auto;
 }
 
 /* Remover cualquier height: 100vh problemático */
 .container-fix {
-    min-height: 100vh;
-    height: auto;
+  min-height: 100vh;
+  height: auto;
 }
 
 /* ESPACIADO PARA EL HERO */
 .section-about {
-    padding-top: 120px; /* Espacio para el header fijo */
-    padding-bottom: 80px;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+  padding-top: 120px;
+  /* Espacio para el header fijo */
+  padding-bottom: 80px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 /* Para móviles */
 @media (max-width: 768px) {
-    .section-about {
-        padding-top: 100px;
-        padding-bottom: 60px;
-        min-height: 90vh;
-    }
+  .section-about {
+    padding-top: 100px;
+    padding-bottom: 60px;
+    min-height: 90vh;
+  }
 }
 
 /* Asegurar que el header fijo no tape el contenido */
 main {
-    padding-top: 80px; /* Altura aproximada del header */
+  padding-top: 80px;
+  /* Altura aproximada del header */
 }
 
 /* Ajustar el scroll margin para las secciones */
-#about, #skills, #projects {
-    scroll-margin-top: 100px;
+#about,
+#skills,
+#projects {
+  scroll-margin-top: 100px;
+}
+
+#galeria3d {
+  padding-top: 120px;
+}
+
+@media (max-width: 768px) {
+  #galeria3d {
+    padding-top: 100px;
+
+  }
 }
