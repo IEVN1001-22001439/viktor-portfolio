@@ -1,6 +1,6 @@
 ---
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
@@ -17,72 +17,89 @@ const lang = (langParam as keyof typeof translations) || "es";
 
 <!doctype html>
 <html lang={lang}>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
 
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="/favicon-16x16.png"
-		/>
-		<link rel="manifest" href="/site.webmanifest" />
-		<link rel="icon" href="/favicon.ico" sizes="any" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
 
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<div class="fixed inset-0 -z-10 overflow-hidden">
-			<!-- Gradiente -->
-			<div
-				class="h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,rgba(240,249,255,0.7)_15%,rgba(14,165,233,0.25)_40%,rgba(5,150,105,0.2)_100%)]"
-			>
-			</div>
-		</div>
-		<Header />
-		<slot />
-		<Footer />
-	</body>
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body>
+        <div class=" inset-0 -z-10 overflow-hidden">
+            <!-- Gradiente -->
+            <div
+                class="h-full w-full [background:radial-gradient(125%_125%_at_50%_10%,rgba(240,249,255,0.7)_15%,rgba(14,165,233,0.25)_40%,rgba(5,150,105,0.2)_100%)]"
+            >
+            </div>
+        </div>
+        <Header />
+        <slot />
+        <Footer />
+    </body>
 </html>
 
 <style is:global>
-	:root {
-		color-scheme: dark light;
-	}
+    /* RESET COMPLETO PARA SCROLL */
+    * {
+        box-sizing: border-box;
+    }
 
-	html {
-		font-family: "Onest Variable", sans-serif;
-		scroll-behavior: smooth;
-	}
+    html {
+        scroll-behavior: smooth;
+        font-family: "Onest Variable", sans-serif;
+        height: 100%;
+    }
 
-	body {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+        /* FONDO DIRECTO EN EL BODY */
+        background: radial-gradient(
+            125% 125% at 50% 10%,
+            rgba(240, 249, 255, 0.7) 15%,
+            rgba(14, 165, 233, 0.25) 40%,
+            rgba(5, 150, 105, 0.2) 100%
+        );
+        background-attachment: fixed; /* Esto hace que el fondo cubra toda la página */
+    }
 
-	/* Ajuste para que el scroll no quede bajo el header */
-	section,
-	[id] {
-		scroll-margin-top: 100px;
-	}
+    .main-content {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+    }
 
-	#about,
-	#skills,
-	#projects {
-		scroll-margin-top: 100px;
-	}
+    main {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Scroll suave entre secciones */
+    section,
+    [id] {
+        scroll-margin-top: 80px;
+    }
 </style>
