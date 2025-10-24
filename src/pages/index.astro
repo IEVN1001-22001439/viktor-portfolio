@@ -14,6 +14,7 @@ import Footer from "../components/Footer.astro";
 import { translations } from "../i18n/translations";
 
 // Obtener el idioma actual desde los parámetros de URL
+const baseUrl = import.meta.env.BASE_URL;
 const url = new URL(Astro.request.url);
 const langParam = url.searchParams.get("lang");
 const lang = (langParam as keyof typeof translations) || "es";
@@ -29,7 +30,7 @@ const t = translations[lang];
             >
                 <img
                     class="rounded-full size-20 sm:size-13 mb-4 sm:mb-0"
-                    src="/public/media/img/VictorHugoAmador.jpg"
+                    src={`${baseUrl}/media/img/VictorHugoAmador.jpg`}
                     alt="Victor Hugo Amador desarrollador web y artista 3D"
                 />
                 <div class="text-center sm:text-left">
@@ -209,14 +210,14 @@ const t = translations[lang];
                         : lang === "en"
                           ? "Collection of 3D models and environments created and textured by me. Each piece explores different visual styles: realistic, low poly, and stylized."
                           : "Collection de modèles et décors 3D créés et texturés par moi-même. Chaque pièce explore différents styles visuels : réaliste, low poly et stylisé."}
-                    imageUrl="/media/img/projects/3D-gallery.png"
+                    imageUrl={`${baseUrl}/media/img/projects/3D-gallery.png`}
                     tags={["Blender", "3D Art"]}
                     imageGradient="from-blue-200 to-purple-300"
                     imagePosition="left"
                     imageRotation="slight-right"
                     imageScale="small"
                     cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
-                    projectUrl="/projects/3D-gallery"
+                    projectUrl={`${baseUrl}/projects/3D-gallery`}
                 />
 
                 <!-- Proyecto 2 - Portafolio Web -->
@@ -231,7 +232,7 @@ const t = translations[lang];
                         : lang === "en"
                           ? "Design and development of my personal web portfolio with a clean aesthetic and smooth animations. Built with Astro and Tailwind for optimal performance."
                           : "Conception et développement de mon portfolio web personnel, au design épuré et aux animations fluides. Réalisé avec Astro et Tailwind pour des performances optimales."}
-                    imageUrl="/media/img/projects/portfolio.png"
+                    imageUrl={`${baseUrl}/media/img/projects/portfolio.png`}
                     tags={["Astro", "Tailwind", "TypeScript"]}
                     imageGradient="from-blue-200 to-purple-300"
                     imagePosition="center"
@@ -250,9 +251,9 @@ const t = translations[lang];
                     description={lang === "es"
                         ? "Página artística inspirada en el álbum folklore de Taylor Swift. Incluye ilustraciones originales y un diseño web que evoca la atmósfera del disco."
                         : lang === "en"
-                          ? "Artistic website inspired by Taylor Swift’s album folklore. Features original illustrations and a web design that captures the album’s intimate atmosphere."
-                          : "Site artistique inspiré de l’album folklore de Taylor Swift. Présente des illustrations originales et une conception évoquant l’atmosphère du disque."}
-                    imageUrl="/media/img/projects/folklore.png"
+                          ? "Artistic website inspired by Taylor Swift's album folklore. Features original illustrations and a web design that captures the album's intimate atmosphere."
+                          : "Site artistique inspiré de l'album folklore de Taylor Swift. Présente des illustrations originales et une conception évoquant l'atmosphère du disque."}
+                    imageUrl={`${baseUrl}/media/img/projects/folklore.png`}
                     tags={["HTML", "CSS", "JavaScript", "Illustration"]}
                     imageGradient="from-blue-200 to-purple-300"
                     imagePosition="left"
@@ -272,9 +273,9 @@ const t = translations[lang];
                     description={lang === "es"
                         ? "Rediseño completo del sitio web corporativo de Grupo Inndex. Implementado en WordPress con optimización de estructura, diseño y velocidad de carga."
                         : lang === "en"
-                          ? "Complete redesign of Grupo Inndex’s corporate website. Implemented in WordPress with improved structure, design, and loading performance."
-                          : "Refonte complète du site web d’entreprise de Grupo Inndex. Réalisée sous WordPress avec une meilleure structure, conception et rapidité de chargement."}
-                    imageUrl="/media/img/projects/grupoinndex.png"
+                          ? "Complete redesign of Grupo Inndex's corporate website. Implemented in WordPress with improved structure, design, and loading performance."
+                          : "Refonte complète du site web d'entreprise de Grupo Inndex. Réalisée sous WordPress avec une meilleure structure, conception et rapidité de chargement."}
+                    imageUrl={`${baseUrl}/media/img/projects/grupoinndex.png`}
                     tags={["Wordpress", "Elementor", "Web design"]}
                     imageGradient="from-blue-200 to-purple-300"
                     imagePosition="right"
@@ -295,8 +296,8 @@ const t = translations[lang];
                         ? "Desarrollo de minijuegos educativos para la app Ludix, diseñada en Unity para aprender idiomas de forma interactiva. Incluye mecánicas de gamificación."
                         : lang === "en"
                           ? "Development of educational mini-games for Ludix, a Unity-based app designed to make language learning interactive and fun."
-                          : "Développement de mini-jeux éducatifs pour Ludix, une application créée avec Unity pour rendre l’apprentissage des langues interactif et ludique."}
-                    imageUrl="/media/img/projects/ludix.png"
+                          : "Développement de mini-jeux éducatifs pour Ludix, une application créée avec Unity pour rendre l'apprentissage des langues interactif et ludique."}
+                    imageUrl={`${baseUrl}/media/img/projects/ludix.png`}
                     tags={["Unity", "C#", "Game design"]}
                     imageGradient="from-blue-200 to-purple-300"
                     imagePosition="right"
