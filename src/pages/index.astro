@@ -194,7 +194,6 @@ const t = translations[lang];
                 {t.projects.title}
             </h1>
 
-            <!-- Cambia este div contenedor -->
             <div
                 class="w-full px-4 sm:px-0 mt-8 sm:mt-16 grid grid-cols-1 gap-4 lg:grid-cols-2"
             >
@@ -210,14 +209,14 @@ const t = translations[lang];
                         : lang === "en"
                           ? "Collection of 3D models and environments created and textured by me. Each piece explores different visual styles: realistic, low poly, and stylized."
                           : "Collection de modèles et décors 3D créés et texturés par moi-même. Chaque pièce explore différents styles visuels : réaliste, low poly et stylisé."}
-                    imageUrl={`/media/img/projects/3D-gallery.png`}
+                    imageUrl="/media/img/projects/3D-gallery.png"
                     tags={["Blender", "3D Art"]}
                     imageGradient="from-blue-200 to-purple-300"
                     imagePosition="left"
                     imageRotation="slight-right"
                     imageScale="small"
                     cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
-                    projectUrl={`${baseUrl}/projects/3D-gallery`}
+                    projectUrl="/projects/3D-gallery/"
                 />
 
                 <!-- Proyecto 2 - Portafolio Web -->
@@ -232,80 +231,81 @@ const t = translations[lang];
                         : lang === "en"
                           ? "Design and development of my personal web portfolio with a clean aesthetic and smooth animations. Built with Astro and Tailwind for optimal performance."
                           : "Conception et développement de mon portfolio web personnel, au design épuré et aux animations fluides. Réalisé avec Astro et Tailwind pour des performances optimales."}
-                    imageUrl={`/media/img/projects/portfolio.png`}
+                    imageUrl="/media/img/projects/portfolio.png"
                     tags={["Astro", "Tailwind", "TypeScript"]}
                     imageGradient="from-blue-200 to-purple-300"
                     imagePosition="center"
                     imageRotation="moderate"
                     imageScale="small"
                     cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
-                />
+                    />
 
-                <!-- PROYECTO 3 - folklore -->
-                <GlassCardProject
-                    title={lang === "es"
-                        ? "folklore"
-                        : lang === "en"
-                          ? "folklore"
-                          : "folklore"}
-                    description={lang === "es"
-                        ? "Página artística inspirada en el álbum folklore de Taylor Swift. Incluye ilustraciones originales y un diseño web que evoca la atmósfera del disco."
-                        : lang === "en"
-                          ? "Artistic website inspired by Taylor Swift's album folklore. Features original illustrations and a web design that captures the album's intimate atmosphere."
-                          : "Site artistique inspiré de l'album folklore de Taylor Swift. Présente des illustrations originales et une conception évoquant l'atmosphère du disque."}
-                    imageUrl={`/media/img/projects/folklore.png`}
-                    tags={["HTML", "CSS", "JavaScript", "Illustration"]}
-                    imageGradient="from-blue-200 to-purple-300"
-                    imagePosition="left"
-                    imageRotation="none"
-                    imageScale="medium"
-                    cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
-                    projectUrl="https://folklore-viktor.netlify.app/"
-                />
+                    <!-- PROYECTO 3 - folklore -->
+                    <GlassCardProject
+                        title={lang === "es"
+                            ? "folklore"
+                            : lang === "en"
+                              ? "folklore"
+                              : "folklore"}
+                        description={lang === "es"
+                            ? "Página artística inspirada en el álbum folklore de Taylor Swift. Incluye ilustraciones originales y un diseño web que evoca la atmósfera del disco."
+                            : lang === "en"
+                              ? "Artistic website inspired by Taylor Swift's album folklore. Features original illustrations and a web design that captures the album's intimate atmosphere."
+                              : "Site artistique inspiré de l'album folklore de Taylor Swift. Présente des illustrations originales et une conception évoquant l'atmosphère du disque."}
+                        imageUrl="/media/img/projects/folklore.png"
+                        tags={["HTML", "CSS", "JavaScript", "Illustration"]}
+                        imageGradient="from-blue-200 to-purple-300"
+                        imagePosition="left"
+                        imageRotation="none"
+                        imageScale="medium"
+                        cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
+                        projectUrl="https://folklore-viktor.netlify.app/"
+                    />
 
-                <!-- Proyecto 4 - Grupo Inndex -->
-                <GlassCardProject
-                    title={lang === "es"
-                        ? "Grupo Inndex"
-                        : lang === "en"
-                          ? "Grupo Inndex"
-                          : "Grupo Inndex"}
-                    description={lang === "es"
-                        ? "Rediseño completo del sitio web corporativo de Grupo Inndex. Implementado en WordPress con optimización de estructura, diseño y velocidad de carga."
-                        : lang === "en"
-                          ? "Complete redesign of Grupo Inndex's corporate website. Implemented in WordPress with improved structure, design, and loading performance."
-                          : "Refonte complète du site web d'entreprise de Grupo Inndex. Réalisée sous WordPress avec une meilleure structure, conception et rapidité de chargement."}
-                    imageUrl={`/media/img/projects/grupoinndex.png`}
-                    tags={["Wordpress", "Elementor", "Web design"]}
-                    imageGradient="from-blue-200 to-purple-300"
-                    imagePosition="right"
-                    imageRotation="slight-left"
-                    imageScale="medium"
-                    cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
-                    projectUrl="https://grupoinndex.netlify.app/"
-                />
+                    <!-- Proyecto 4 - Grupo Inndex -->
+                    <GlassCardProject
+                        title={lang === "es"
+                            ? "Grupo Inndex"
+                            : lang === "en"
+                              ? "Grupo Inndex"
+                              : "Grupo Inndex"}
+                        description={lang === "es"
+                            ? "Rediseño completo del sitio web corporativo de Grupo Inndex. Implementado en WordPress con optimización de estructura, diseño y velocidad de carga."
+                            : lang === "en"
+                              ? "Complete redesign of Grupo Inndex's corporate website. Implemented in WordPress with improved structure, design, and loading performance."
+                              : "Refonte complète du site web d'entreprise de Grupo Inndex. Réalisée sous WordPress avec une meilleure structure, conception et rapidité de chargement."}
+                        imageUrl="/media/img/projects/grupoinndex.png"
+                        tags={["Wordpress", "Elementor", "Web design"]}
+                        imageGradient="from-blue-200 to-purple-300"
+                        imagePosition="right"
+                        imageRotation="slight-left"
+                        imageScale="medium"
+                        cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
+                        projectUrl="https://grupoinndex.netlify.app/"
+                    />
 
-                <!-- PROYECTO 5 - Ludix -->
-                <GlassCardProject
-                    title={lang === "es"
-                        ? "Ludix"
-                        : lang === "en"
-                          ? "Ludix"
-                          : "Ludix"}
-                    description={lang === "es"
-                        ? "Desarrollo de minijuegos educativos para la app Ludix, diseñada en Unity para aprender idiomas de forma interactiva. Incluye mecánicas de gamificación."
-                        : lang === "en"
-                          ? "Development of educational mini-games for Ludix, a Unity-based app designed to make language learning interactive and fun."
-                          : "Développement de mini-jeux éducatifs pour Ludix, une application créée avec Unity pour rendre l'apprentissage des langues interactif et ludique."}
-                    imageUrl={`/media/img/projects/ludix.png`}
-                    tags={["Unity", "C#", "Game design"]}
-                    imageGradient="from-blue-200 to-purple-300"
-                    imagePosition="right"
-                    imageRotation="moderate"
-                    imageScale="small"
-                    cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
-                    projectUrl="https://www.youtube.com/watch?v=mbEin7RmL_Y&feature=youtu.be"
-                />
+                    <!-- PROYECTO 5 - Ludix -->
+                    <GlassCardProject
+                        title={lang === "es"
+                            ? "Ludix"
+                            : lang === "en"
+                              ? "Ludix"
+                              : "Ludix"}
+                        description={lang === "es"
+                            ? "Desarrollo de minijuegos educativos para la app Ludix, diseñada en Unity para aprender idiomas de forma interactiva. Incluye mecánicas de gamificación."
+                            : lang === "en"
+                              ? "Development of educational mini-games for Ludix, a Unity-based app designed to make language learning interactive and fun."
+                              : "Développement de mini-jeux éducatifs pour Ludix, une application créée avec Unity pour rendre l'apprentissage des langues interactif et ludique."}
+                        imageUrl="/media/img/projects/ludix.png"
+                        tags={["Unity", "C#", "Game design"]}
+                        imageGradient="from-blue-200 to-purple-300"
+                        imagePosition="right"
+                        imageRotation="moderate"
+                        imageScale="small"
+                        cardClass="min-h-[300px] sm:min-h-[400px] mx-auto w-full"
+                        projectUrl="https://www.youtube.com/watch?v=mbEin7RmL_Y&feature=youtu.be"
+                    />
+                </GlassCardProject>
             </div>
         </SectionContainerMain>
     </main>

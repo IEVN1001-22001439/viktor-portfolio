@@ -1,28 +1,27 @@
 ---
 import LanguageSwitcher from "./LanguageSwitcher.astro";
 import { translations } from "../i18n/translations";
-import { Image } from "astro:assets";
 
-const baseUrl = import.meta.env.BASE_URL;
 const url = new URL(Astro.request.url);
 const langParam = url.searchParams.get("lang");
 const lang = (langParam as keyof typeof translations) || "es";
 const t = translations[lang];
+
+// Determinar si estamos en la página principal
+const isHomePage = Astro.url.pathname === "/";
 ---
 
 <header
     class="sticky top-4 flex justify-between items-center mx-4 sm:mx-auto w-full sm:w-[95%] lg:w-[1120px] rounded-full px-4 sm:px-6 py-2 my-4 bg-white/10 backdrop-blur-md border-white border-1 inset-shadow-sm shadow-md z-50"
 >
-    <a href={`${baseUrl}`} class="flex-shrink-0">
-        <Image
-            src={`/media/img/Viktor-logo-liquid-metal.png`}
+    <a href={`/?lang=${lang}`} class="flex-shrink-0">
+        <img
+            src="/media/img/Viktor-logo-liquid-metal.png"
             alt="Viktor liquid metal logo"
             width={85}
             height={85}
             class="w-[50px] sm:w-[70px] lg:w-[85px] h-auto"
             loading="eager"
-            fetchpriority="high"
-            decoding="sync"
         />
     </a>
 
@@ -30,33 +29,33 @@ const t = translations[lang];
         class="hidden md:flex flex-row gap-x-6 lg:gap-x-8 justify-center opacity-70 text-base lg:text-md"
     >
         <a
-            href={`#about`}
+            href={isHomePage ? "#about" : `/?lang=${lang}#about`}
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.nav.about}
         </a>
         <a
-            href={`#skills`}
+            href={isHomePage ? "#skills" : `/?lang=${lang}#skills`}
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.nav.skills}
         </a>
         <a
-            href={`#projects`}
+            href={isHomePage ? "#projects" : `/?lang=${lang}#projects`}
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.nav.projects}
         </a>
         <a
-            href={`/projects/3D-gallery`}
+            href="/projects/3D-gallery/"
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.gallery.title || "3D Gallery"}
         </a>
     </nav>
 
-    <!-- <div class="flex items-center gap-x-3 sm:gap-x-4">
-        <div class="hidden sm:block">
+    <div class="flex items-center gap-x-3 sm:gap-x-4">
+        <!-- <div class="hidden sm:block">
             <LanguageSwitcher />
         </div> -->
 
@@ -85,28 +84,28 @@ const t = translations[lang];
     >
         <nav class="flex flex-col gap-2">
             <a
-                href={`#about`}
+                href={isHomePage ? "#about" : `/?lang=${lang}#about`}
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
                 {t.nav.about}
             </a>
             <a
-                href={`#skills`}
+                href={isHomePage ? "#skills" : `/?lang=${lang}#skills`}
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
                 {t.nav.skills}
             </a>
             <a
-                href={`#projects`}
+                href={isHomePage ? "#projects" : `/?lang=${lang}#projects`}
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
                 {t.nav.projects}
             </a>
             <a
-                href={`/projects/3D-gallery`}
+                href="/projects/3D-gallery/"
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
@@ -157,17 +156,11 @@ const t = translations[lang];
             navLinks.forEach(function (link) {
                 link.addEventListener("click", function (e) {
                     var href = this.getAttribute("href");
-                    var currentPath = window.location.pathname;
-                    var targetPath =
-                        href
-                            .split("#")[0]
-                            .replace("/?lang=" + getCurrentLang(), "") || "/";
 
-                    // Actualizado para usar baseUrl
+                    // Si es un anchor link y estamos en la página principal
                     if (
-                        currentPath === "`${baseUrl}/`" &&
                         href.includes("#") &&
-                        href.startsWith("`${baseUrl}/`?")
+                        window.location.pathname === "/"
                     ) {
                         e.preventDefault();
 
@@ -182,9 +175,11 @@ const t = translations[lang];
                                 block: "start",
                             });
 
+                            // Actualizar URL sin recargar
                             window.history.pushState(null, "", href);
                         }
                     }
+                    // Los links que van a otras páginas se manejan normalmente
                 });
             });
 
@@ -225,7 +220,19 @@ const t = translations[lang];
     </script>
 
     <style>
+        /* Header centrado correctamente */
+        header {
+            position: sticky !important;
+            top: 1rem !important;
+            left: 0 !important;
+            right: 0 !important;
+            margin: 0 auto !important;
+            width: 95% !important;
+            max-width: 1120px !important;
+            transform: none !important;
+        }
 
+        /* Para móviles */
         @media (max-width: 767px) {
             header {
                 width: calc(100% - 2rem) !important;
@@ -234,6 +241,7 @@ const t = translations[lang];
             }
         }
 
+        /* Para pantallas muy pequeñas */
         @media (max-width: 480px) {
             header {
                 width: calc(100% - 1rem) !important;
