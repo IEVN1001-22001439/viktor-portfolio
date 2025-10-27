@@ -11,5 +11,8 @@ export default defineConfig({
     : 'https://IEVN1001-22001439.github.io',
   base: isNetlify 
     ? '/'  // En Netlify no necesitas base path
-    : '/viktor-portfolio'
+    : '/viktor-portfolio',
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
