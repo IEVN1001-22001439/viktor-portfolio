@@ -30,35 +30,35 @@ const t = translations[lang];
         class="hidden md:flex flex-row gap-x-6 lg:gap-x-8 justify-center opacity-70 text-base lg:text-md"
     >
         <a
-            href={`${baseUrl}/?lang=${lang}#about`}
+            href={`${baseUrl}/#about`}
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.nav.about}
         </a>
         <a
-            href={`${baseUrl}/?lang=${lang}#skills`}
+            href={`${baseUrl}/#skills`}
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.nav.skills}
         </a>
         <a
-            href={`${baseUrl}/?lang=${lang}#projects`}
+            href={`${baseUrl}/#projects`}
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.nav.projects}
         </a>
         <a
-            href={`${baseUrl}/projects/3D-gallery?lang=${lang}`}
+            href={`${baseUrl}/projects/3D-gallery`}
             class="hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-1 nav-link"
         >
             {t.gallery.title || "3D Gallery"}
         </a>
     </nav>
 
-    <div class="flex items-center gap-x-3 sm:gap-x-4">
+    <!-- <div class="flex items-center gap-x-3 sm:gap-x-4">
         <div class="hidden sm:block">
             <LanguageSwitcher />
-        </div>
+        </div> -->
 
         <button
             class="md:hidden flex flex-col justify-center items-center w-8 h-8 relative group"
@@ -85,39 +85,39 @@ const t = translations[lang];
     >
         <nav class="flex flex-col gap-2">
             <a
-                href={`${baseUrl}/?lang=${lang}#about`}
+                href={`${baseUrl}/#about`}
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
                 {t.nav.about}
             </a>
             <a
-                href={`${baseUrl}/?lang=${lang}#skills`}
+                href={`${baseUrl}/#skills`}
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
                 {t.nav.skills}
             </a>
             <a
-                href={`${baseUrl}/?lang=${lang}#projects`}
+                href={`${baseUrl}/#projects`}
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
                 {t.nav.projects}
             </a>
             <a
-                href={`${baseUrl}/projects/3D-gallery?lang=${lang}`}
+                href={`${baseUrl}/projects/3D-gallery`}
                 class="text-blue-900/70 font-medium hover:text-blue-300 transition-colors duration-200 whitespace-nowrap py-3 px-4 rounded-lg hover:bg-white/20 text-center nav-link"
                 data-menu-close
             >
                 {t.gallery.title || "3D Gallery"}
             </a>
 
-            <div class="bg-white/50 pt-3 border-t border-white/20 mt-2">
+            <!-- <div class="bg-white/50 pt-3 border-t border-white/20 mt-2">
                 <div class="flex justify-center">
                     <LanguageSwitcher />
                 </div>
-            </div>
+            </div> -->
         </nav>
     </div>
 
