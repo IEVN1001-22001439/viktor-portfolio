@@ -7,7 +7,7 @@ const isNetlify = process.env.NETLIFY === 'true' || process.env.CONTEXT === 'pro
 
 export default defineConfig({
   site: isNetlify 
-    ? 'https://viktor-fbx.netlify.app'  // Reemplaza con tu URL de Netlify
+    ? 'https://viktor-fbx.netlify.app'
     : 'https://IEVN1001-22001439.github.io',
   base: isNetlify 
     ? '/'  // En Netlify no necesitas base path
