@@ -74,6 +74,11 @@ export const translations = {
                     title: "Gato Low Poly",
                     details: "Modelo low poly de un gato del videojuego 'Mouse House'. Diseñado con una silueta simpática y texturas suaves para complementar el estilo visual del juego.",
                     tags: ["Low Poly", "Personaje", "Videojuego", "Animales"]
+                },
+                IsoRoom: {
+                    title: "Rincón Cultural Parisino",
+                    details: "Espacio íntimo inspirado en el París de los 70, donde conviven la música en vinilo y la literatura clásica.",
+                    tags: ["parís", "cultura", "vinilos", "libros", "años 70", "habitación", "colección"]
                 }
             },
             tags: {
@@ -156,6 +161,11 @@ export const translations = {
                 cat: {
                     title: "Low Poly Cat",
                     details: "Low poly model of one of the cats from 'Mouse House'. Designed with a charming silhouette and soft textures to match the game’s visual style."
+                },
+                IsoRoom: {
+                    title: "Parisian Cultural Corner",
+                    details: "Intimate space inspired by 70s Paris, where vinyl music and classic literature coexist.",
+                    tags: ["paris", "culture", "vinyl", "books", "70s", "bedroom", "collection"]
                 }
             },
             tags: {
@@ -237,6 +247,11 @@ export const translations = {
                 cat: {
                     title: "Chat Low Poly",
                     details: "Modèle low poly d’un des chats du jeu 'Mouse House'. Conçu avec une silhouette attachante et des textures douces pour correspondre au style visuel du jeu."
+                },
+                IsoRoom: {
+                    title: "Coin Culturel Parisien",
+                    details: "Espace intime inspiré du Paris des années 70, où cohabitent musique vinyle et littérature classique.",
+                    tags: ["paris", "culture", "vinyles", "livres", "années 70", "chambre", "collection"]
                 }
             },
             tags: {
